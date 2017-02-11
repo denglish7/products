@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <form action="{% url 'first_app:logoff' %}" method="post">
+                {% csrf_token %}
+                <input class="logout" type="submit" name="" value="Log off">
+            </form>
+            <h1>Hello {{user.first_name}}!</h1>
+            <a href="{% url 'first_app:add_page' %}">Add Item</a>
+            <h3>Your Wish List:</h3>
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Added By</th>
+                    <th>Date Added</th>
+                    <th>Action</th>
+                </tr>
+                {% for product in my_wishlist %}
+                <tr>
+                    <td><a href="{% url 'first_app:show_page' id=product.id %}">{{product.name}}</a></td>
+                    <td>{{product.user_products.first_name}}</td>
+                    <td>{{product.created_at}}</td>
+                    {% if product.user_products.id == request.session.user_id%}
+                    <td><a href="{% url 'first_app:delete' id=product.id %}">Delete</a></td>
+                    {% else %}
+                    <td><a href="{% url 'first_app:remove_from_list' id=product.id %}">Remove from my Wishlist</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+            <h3>Other Users' Wish List</h3>
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Added By</th>
+                    <th>Date Added</th>
+                    <th>Action</th>
+                </tr>
+                {% for product in others_wishlist%}
+                <tr>
+                    <td><a href="{% url 'first_app:show_page' id=product.id %}">{{product.name}}</a></td>
+                    <td>{{product.user_products.first_name}}</td>
+                    <td>{{product.created_at}}</td>
+                    <td><a href="{% url 'first_app:add_to_list' id=product.id %}">Add to my Wishlist</a></td>
+                </tr>
+                {% endfor %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <a href="{% url 'first_app:logoff' %}">Logout</a>
+            <a href="{% url 'first_app:index' %}">Home</a>
+            <h1>Create a New Wish List Item</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <p id='error'>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            <form action="{%url 'first_app:add_product' %}" method="post">
+                {% csrf_token %}
+                <label>Item/Product</label>
+                <input type="text" name="name">
+                <input type="submit" value="Add">
+            </form>
+        </div>
+    </body>
+</html>

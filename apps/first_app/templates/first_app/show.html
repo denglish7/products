@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <a href="{% url 'first_app:logoff' %}">Logout</a>
+            <a href="{% url 'first_app:index' %}">Home</a>
+            <h1>{{product.name}}</h1>
+            <h2>{{creator.first_name}}</h2>
+            <h3>Users who added this product/item under their wish list:</h3>
+            {% for user in other_users %}
+            <p>{{user.first_name}}</p>
+            {% endfor %}
+        </div>
+    </body>
+</html>

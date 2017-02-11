@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="wrapper">
+            {% if messages %}
+                {% for message in messages %}
+                    <p id='error'>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            <div class="register">
+                <h2>Registration</h2>
+                <form class="" action="{%url 'log_reg:register' %}" method="post">
+                    {% csrf_token %}
+                    <label>First Name:</label>
+                    <input type="text" name="first_name" value="">
+                    <label>Last Name:</label>
+                    <input type="text" name="last_name" value="">
+                    <label>Email:</label>
+                    <input type="text" name="email" value="">
+                    <label>Password:</label>
+                    <input type="password" name="password" value="">
+                    <label>Confirm Password:</label>
+                    <input type="password" name="confirm" value="">
+                    <input class='button' type="submit" name="register_button" value="Register">
+                </form>
+            </div>
+            <div class="login">
+                <h2>Login</h2>
+                <form class="" action="{%url 'log_reg:login' %}" method="post">
+                    {% csrf_token %}
+                    <label>Email:</label>
+                    <input type="text" name="email" value="">
+                    <label>Password:</label>
+                    <input type="password" name="password" value="">
+                    <input class='button' type="submit" name="login_button" value="Login">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
